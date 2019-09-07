@@ -1,4 +1,4 @@
-# apollo-link-logger
+# apollo-link-console-log
 
 > A logger for Apollo Link with expandable output
 

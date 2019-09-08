@@ -17,6 +17,7 @@ const parseQueryString = string => {
 const consoleLogger = new ApolloLink((operation, forward) => {
   operation.setContext({ start: new Date() });
   const operationType = operation.query.definitions[0].operation;
+  const { variables } = operation
   const [schemaName, queryName, query] = parseQueryString(
     operation.query.loc.source.body
   );
@@ -26,11 +27,21 @@ const consoleLogger = new ApolloLink((operation, forward) => {
     console.groupCollapsed(
       `%cgraphql %c${operationType} %c${schemaName}::%c${queryName} %c@ ${date}`,
       'color: gray; font-weight: lighter',
-      'color: black; font-weight: bold; color: green',
+      'color: black; font-weight: bold; color: darkblue',
       'color: gray; font-weight: lighter',
       'color: black; font-weight: bold',
       'color: gray; font-weight: lighter'
     );
+    if (variables) {
+      Object.keys(variables).forEach(key => {
+        console.log(
+          `%c${key}: %c${variables[key]}`,
+          'color: gray; font-weight: lighter',
+          'color: black; font-weight: bold'
+        );
+      })
+    }
+
     console.groupCollapsed('QUERY');
     console.log(query);
     console.groupEnd();
@@ -47,6 +58,15 @@ const consoleLogger = new ApolloLink((operation, forward) => {
       'color: black; font-weight: bold',
       'color: gray; font-weight: lighter'
     );
+    if (variables) {
+      Object.keys(variables).forEach(key => {
+        console.log(
+          `%c${key}: %c${variables[key]}`,
+          'color: gray; font-weight: lighter',
+          'color: black; font-weight: bold'
+        );
+      })
+    }
     console.groupCollapsed('QUERY');
     console.log(query);
     console.groupEnd();

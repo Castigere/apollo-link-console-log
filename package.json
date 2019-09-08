@@ -4,11 +4,10 @@
   "description": "Console logger middleware for apollo link",
   "main": "./lib/index.js",
   "scripts": {
-    "build:js": "babel src --out-dir lib",
-    "clean": "rimraf lib dist",
-    "build": "npm-run-all clean -p build:* -s",
-    "eslint": "eslint src/**",
-    "semver": "node scripts/semver"
+    "build:js": "npx babel src --out-dir lib",
+    "clean": "npx rimraf lib dist",
+    "build": "npx npm-run-all clean -p build:* -s",
+    "eslint": "npx eslint src/**"
   },
   "files": [
     "lib"
@@ -17,18 +16,14 @@
     "acccess": "public"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.3",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^6.2.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^9.2.0",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.0"
+    "eslint-plugin-node": "^9.2.0"
   },
   "peerDependencies": {
     "apollo-link": "^1.2.12",

@@ -71,13 +71,24 @@ const consoleLogger = new ApolloLink((operation, forward) => {
     console.log(query);
     console.groupEnd();
     console.groupCollapsed('RESULTS');
-    Object.keys(result.data[queryName]).forEach(key => {
-      console.log(
-        `%c${key}: %c${result.data[queryName][key]}`,
-        'color: gray; font-weight: lighter',
-        'color: black; font-weight: bold'
-      );
-    });
+    if (result.data) {
+      Object.keys(result.data[queryName]).forEach(key => {
+        console.log(
+          `%c${key}: %c${result.data[queryName][key]}`,
+          'color: gray; font-weight: lighter',
+          'color: black; font-weight: bold'
+        );
+      });
+    }
+    if (result.errors) {
+      result.errors.forEach(err => {
+        console.log(
+          `%c${err.message}: %c${err.path[0]}`,
+          'color: gray; font-weight: lighter',
+          'color: black; font-weight: bold'
+        );
+      });
+    }
     console.groupEnd();
     console.groupEnd();
     return result;
